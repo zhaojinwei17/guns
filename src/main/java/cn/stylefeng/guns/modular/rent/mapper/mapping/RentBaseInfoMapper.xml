@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.rent.mapper.RentBaseInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="renting_house" jdbcType="VARCHAR" property="rentingHouse" />
+    <result column="renting_unit" jdbcType="VARCHAR" property="rentingUnit" />
+    <result column="renting_adress" jdbcType="VARCHAR" property="rentingAdress" />
+    <result column="tenants_name" jdbcType="VARCHAR" property="tenantsName" />
+    <result column="tenants_telephone" jdbcType="VARCHAR" property="tenantsTelephone" />
+    <result column="tenants_weixin" jdbcType="VARCHAR" property="tenantsWeixin" />
+    <result column="renting_time" jdbcType="TIMESTAMP" property="rentingTime" />
+    <result column="renting_price" jdbcType="DECIMAL" property="rentingPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_name" jdbcType="VARCHAR" property="updateName" />
+    <result column="memmo" jdbcType="VARCHAR" property="memmo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, renting_house, renting_unit, renting_adress, tenants_name, tenants_telephone, 
+    tenants_weixin, renting_time, renting_price, create_time, update_time, update_name, 
+    memmo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rent_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rent_base_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
+    insert into rent_base_info (id, renting_house, renting_unit, 
+      renting_adress, tenants_name, tenants_telephone, 
+      tenants_weixin, renting_time, renting_price, 
+      create_time, update_time, update_name, 
+      memmo)
+    values (#{id,jdbcType=VARCHAR}, #{rentingHouse,jdbcType=VARCHAR}, #{rentingUnit,jdbcType=VARCHAR}, 
+      #{rentingAdress,jdbcType=VARCHAR}, #{tenantsName,jdbcType=VARCHAR}, #{tenantsTelephone,jdbcType=VARCHAR}, 
+      #{tenantsWeixin,jdbcType=VARCHAR}, #{rentingTime,jdbcType=TIMESTAMP}, #{rentingPrice,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, 
+      #{memmo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
+    insert into rent_base_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rentingHouse != null">
+        renting_house,
+      </if>
+      <if test="rentingUnit != null">
+        renting_unit,
+      </if>
+      <if test="rentingAdress != null">
+        renting_adress,
+      </if>
+      <if test="tenantsName != null">
+        tenants_name,
+      </if>
+      <if test="tenantsTelephone != null">
+        tenants_telephone,
+      </if>
+      <if test="tenantsWeixin != null">
+        tenants_weixin,
+      </if>
+      <if test="rentingTime != null">
+        renting_time,
+      </if>
+      <if test="rentingPrice != null">
+        renting_price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateName != null">
+        update_name,
+      </if>
+      <if test="memmo != null">
+        memmo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingHouse != null">
+        #{rentingHouse,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingUnit != null">
+        #{rentingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingAdress != null">
+        #{rentingAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantsName != null">
+        #{tenantsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantsTelephone != null">
+        #{tenantsTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantsWeixin != null">
+        #{tenantsWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingTime != null">
+        #{rentingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentingPrice != null">
+        #{rentingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null">
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="memmo != null">
+        #{memmo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
+    update rent_base_info
+    <set>
+      <if test="rentingHouse != null">
+        renting_house = #{rentingHouse,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingUnit != null">
+        renting_unit = #{rentingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingAdress != null">
+        renting_adress = #{rentingAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantsName != null">
+        tenants_name = #{tenantsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantsTelephone != null">
+        tenants_telephone = #{tenantsTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantsWeixin != null">
+        tenants_weixin = #{tenantsWeixin,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingTime != null">
+        renting_time = #{rentingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentingPrice != null">
+        renting_price = #{rentingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null">
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="memmo != null">
+        memmo = #{memmo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
+    update rent_base_info
+    set renting_house = #{rentingHouse,jdbcType=VARCHAR},
+      renting_unit = #{rentingUnit,jdbcType=VARCHAR},
+      renting_adress = #{rentingAdress,jdbcType=VARCHAR},
+      tenants_name = #{tenantsName,jdbcType=VARCHAR},
+      tenants_telephone = #{tenantsTelephone,jdbcType=VARCHAR},
+      tenants_weixin = #{tenantsWeixin,jdbcType=VARCHAR},
+      renting_time = #{rentingTime,jdbcType=TIMESTAMP},
+      renting_price = #{rentingPrice,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      memmo = #{memmo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
