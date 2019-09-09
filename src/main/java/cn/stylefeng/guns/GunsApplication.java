@@ -16,6 +16,7 @@
 package cn.stylefeng.guns;
 
 import cn.stylefeng.roses.core.config.WebAutoConfiguration;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +30,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @Date 2017/5/21 12:06
  */
 @SpringBootApplication(exclude = {WebAutoConfiguration.class})
+@MapperScan("cn.stylefeng.guns.modular.rent.mapper")
 @EnableScheduling
 public class GunsApplication {
 
