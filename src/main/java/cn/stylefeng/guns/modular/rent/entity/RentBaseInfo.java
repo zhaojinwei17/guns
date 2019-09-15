@@ -1,5 +1,7 @@
 package cn.stylefeng.guns.modular.rent.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,6 +11,10 @@ import java.util.Date;
  * @author 
  */
 public class RentBaseInfo implements Serializable {
+
+    private Integer page;
+
+    private Integer limit;
     /**
      * 房租信息ID
      */
@@ -75,6 +81,22 @@ public class RentBaseInfo implements Serializable {
     private String memmo;
 
     private static final long serialVersionUID = 1L;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
 
     public String getId() {
         return id;
