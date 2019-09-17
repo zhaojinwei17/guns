@@ -12,7 +12,7 @@ public interface RentBaseInfoMapper {
 
     int deleteByExample(RentBaseInfoExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(RentBaseInfo record);
 
@@ -20,7 +20,7 @@ public interface RentBaseInfoMapper {
 
     List<RentBaseInfo> selectByExample(RentBaseInfoExample example);
 
-    RentBaseInfo selectByPrimaryKey(String id);
+    RentBaseInfo selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") RentBaseInfo record, @Param("example") RentBaseInfoExample example);
 

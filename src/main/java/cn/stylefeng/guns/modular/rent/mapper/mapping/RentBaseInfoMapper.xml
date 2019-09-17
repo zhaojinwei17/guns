@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.stylefeng.guns.modular.rent.mapper.RentBaseInfoMapper">
   <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="renting_house" jdbcType="VARCHAR" property="rentingHouse" />
     <result column="renting_unit" jdbcType="VARCHAR" property="rentingUnit" />
     <result column="renting_adress" jdbcType="VARCHAR" property="rentingAdress" />
@@ -101,15 +101,15 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from rent_base_info
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from rent_base_info
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cn.stylefeng.guns.modular.rent.entity.RentBaseInfoExample">
     delete from rent_base_info
@@ -123,7 +123,7 @@
       tenants_weixin, renting_time, renting_price, 
       create_time, update_time, update_name, 
       memmo)
-    values (#{id,jdbcType=VARCHAR}, #{rentingHouse,jdbcType=VARCHAR}, #{rentingUnit,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{rentingHouse,jdbcType=VARCHAR}, #{rentingUnit,jdbcType=VARCHAR}, 
       #{rentingAdress,jdbcType=VARCHAR}, #{tenantsName,jdbcType=VARCHAR}, #{tenantsTelephone,jdbcType=VARCHAR}, 
       #{tenantsWeixin,jdbcType=VARCHAR}, #{rentingTime,jdbcType=TIMESTAMP}, #{rentingPrice,jdbcType=DECIMAL}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, 
@@ -174,7 +174,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="rentingHouse != null">
         #{rentingHouse,jdbcType=VARCHAR},
@@ -224,7 +224,7 @@
     update rent_base_info
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.rentingHouse != null">
         renting_house = #{record.rentingHouse,jdbcType=VARCHAR},
@@ -269,7 +269,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update rent_base_info
-    set id = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
       renting_house = #{record.rentingHouse,jdbcType=VARCHAR},
       renting_unit = #{record.rentingUnit,jdbcType=VARCHAR},
       renting_adress = #{record.rentingAdress,jdbcType=VARCHAR},
@@ -326,7 +326,7 @@
         memmo = #{memmo,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.stylefeng.guns.modular.rent.entity.RentBaseInfo">
     update rent_base_info
@@ -342,6 +342,6 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_name = #{updateName,jdbcType=VARCHAR},
       memmo = #{memmo,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

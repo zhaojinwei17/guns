@@ -1,7 +1,5 @@
 package cn.stylefeng.guns.modular.rent.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,14 +9,12 @@ import java.util.Date;
  * @author 
  */
 public class RentBaseInfo implements Serializable {
-
     private Integer page;
-
     private Integer limit;
     /**
      * 房租信息ID
      */
-    private String id;
+    private Integer id;
 
     /**
      * 房租名称(三水新城高档公寓)
@@ -98,11 +94,11 @@ public class RentBaseInfo implements Serializable {
         this.limit = limit;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

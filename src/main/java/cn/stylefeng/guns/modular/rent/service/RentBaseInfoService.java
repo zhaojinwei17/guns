@@ -35,7 +35,7 @@ public class RentBaseInfoService {
     }
 
     public ResponseData addOrUpdate(RentBaseInfo rentBaseInfo) {
-        if(StringUtils.isNotBlank(rentBaseInfo.getId())){
+        if(rentBaseInfo.getId()!=null){
             if(rentBaseInfoMapper.selectByPrimaryKey(rentBaseInfo.getId())!=null){
                 rentBaseInfoMapper.updateByPrimaryKeySelective(rentBaseInfo);
                 return ResponseData.success(200,"更新成功！",null);
@@ -48,7 +48,7 @@ public class RentBaseInfoService {
         }
     }
 
-    public ResponseData deleteById(String id) {
+    public ResponseData deleteById(Integer id) {
         rentBaseInfoMapper.deleteByPrimaryKey(id);
         return ResponseData.success(200,"删除成功！",null);
     }

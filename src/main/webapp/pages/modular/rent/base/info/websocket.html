@@ -1,0 +1,22 @@
+@layout("/common/_container.html",{js:["/assets/modular/rent/base/info/websocket.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">websocket demo</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+        <input id="connection" type="button" class="layui-btn" value="connection"/>
+    </div>
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+        <input id="message" placeholder="请输入消息！" type="text" class="layui-input"/>
+    </div>
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+        <input id="send" type="button" class="layui-btn" value="send"/>
+    </div>
+    <div id="msg">
+
+    </div>
+
+</div>
+@}

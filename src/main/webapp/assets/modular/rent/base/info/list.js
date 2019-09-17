@@ -4,6 +4,7 @@ layui.use(['table', 'form', 'laydate','layer'], function () {
     var form = layui.form;
     var laydate = layui.laydate;
     var layer = layui.layer;
+    var isSubmit;
 
     // //执行一个 table 实例
     table.render({
@@ -16,7 +17,6 @@ layui.use(['table', 'form', 'laydate','layer'], function () {
         ,page: true //开启分页
         ,height: 'full-98'
         ,cols: [[ //表头
-            {type: 'checkbox', fixed: 'left'}
             ,{field: 'id', hide:true}
             ,{field: 'rentingHouse', title: '房租名称'}
             ,{field: 'rentingUnit', title: '房租规格' }
@@ -30,27 +30,7 @@ layui.use(['table', 'form', 'laydate','layer'], function () {
 
     //添加
     $('#btnAdd').on('click', function(){
-        layer.open({
-            type: 1
-            ,anim: 4
-            ,title: '添加'
-            ,area: ['700px', '400px']
-            ,shade:  [0.8,'#393D49']
-            ,maxmin: true
-            ,moveOut: true
-            ,offset: 'auto'
-            ,content: popupEdit.innerHTML
-            ,success: function(layero, index){
-                //日期渲染
-                laydate.render({
-                    elem: '.date'
-                });
-                //取消按钮点击事件
-                $('#cancel').on('click', function(){
-                    layer.closeAll();
-                });
-            }
-        });
+        openDetail("添加");
     });
     //搜索
     $('#btnSearch').on('click', function(){
@@ -88,53 +68,67 @@ layui.use(['table', 'form', 'laydate','layer'], function () {
                 });
             });
         } else if(layEvent === 'edit'){ //编辑
-            layer.open({
-                type: 1
-                ,anim: 4
-                ,title: '编辑'
-                ,area: ['700px', '400px']
-                ,shade:  [0.8,'#393D49']
-                ,maxmin: true
-                ,moveOut: true
-                ,offset: 'auto'
-                ,content: popupEdit.innerHTML
-                ,success: function(layero, index){
-                    //初始化表单
-                    form.val('rentEdit',data);
-                    //日期渲染
-                    laydate.render({
-                        elem: '.date'
-                    });
-                    //取消按钮点击事件
-                    $('#cancel').on('click', function(){
-                        layer.closeAll();
-                    });
-                }
-            });
+            openDetail("编辑",data);
         }
     });
-    //监听提交
-    form.on('submit(submit)', function(data){
-        var json = JSON.stringify(data.field);
-        $.ajax({
-            type : "post",//请求类型
-            url : "/rent/base/add/or/update",//请求的 URL地址
-            data : json,
-            contentType:"application/json;charset=UTF-8",
-            dataType : "json",//返回的数据类型
-            success: function (data) {
-                if(data.code===200){
-                    Feng.success(data.message);
-                    $("#btnSearch").trigger("click");
-                    layer.closeAll();
-                }else {
-                    Feng.error(data.message);
+
+    var openDetail=function(title,data){
+        layer.open({
+            type: 1
+            ,anim: 4
+            ,title: title
+            ,area: ['700px', '400px']
+            ,shade:  [0.8,'#393D49']
+            ,maxmin: true
+            ,moveOut: true
+            ,offset: 'auto'
+            ,content: popupEdit.innerHTML
+            ,btn: ['提交', '取消']
+            ,yes: function(){
+                $("#submit").trigger("click");
+                if(isSubmit){
+                    isSubmit=false;
+                    $.ajax({
+                        type : "post",//请求类型
+                        url : "/rent/base/add/or/update",//请求的 URL地址
+                        data : JSON.stringify(form.val('rentEdit')),
+                        contentType:"application/json;charset=UTF-8",
+                        dataType : "json",//返回的数据类型
+                        success: function (data) {
+                            if(data.code===200){
+                                Feng.success(data.message);
+                                $("#btnSearch").trigger("click");
+                                layer.closeAll();
+                            }else {
+                                Feng.error(data.message);
+                            }
+                        },
+                        error:function (data) {
+                            Feng.error("服务器异常！");
+                        }
+                    });
                 }
-            },
-            error:function (data) {
-                Feng.error("服务器异常！");
+            }
+            ,btn2: function(){
+                layer.closeAll();
+            }
+            ,success: function(layero, index){
+                //初始化表单
+                form.val('rentEdit',data);
+                //日期渲染
+                laydate.render({
+                    elem: '.date'
+                });
+                //取消按钮点击事件
+                $('#cancel').on('click', function(){
+                    layer.closeAll();
+                });
             }
         });
+    }
+    //监听提交
+    form.on('submit(submit)', function(data){
+        isSubmit=true;
         return false;
     });
 });

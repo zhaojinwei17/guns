@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RestController
 @RequestMapping("/rent")
@@ -37,8 +36,13 @@ public class RentBaseInfoController {
         return responseData;
     }
     @DeleteMapping("/base/del/{id}")
-    public ResponseData deleteById(@PathVariable("id") String id){
+    public ResponseData deleteById(@PathVariable("id") Integer id){
         return rentBaseInfoService.deleteById(id);
     }
 
+    @GetMapping("/base/info/websocket/page")
+    public ModelAndView websocketPage() {
+        ModelAndView modelAndView=new ModelAndView(PREFIX + "websocket.html");
+        return modelAndView;
+    }
 }
